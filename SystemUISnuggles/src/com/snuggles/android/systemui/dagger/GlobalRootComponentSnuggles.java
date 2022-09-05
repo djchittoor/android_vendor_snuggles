@@ -1,6 +1,5 @@
 package com.snuggles.android.systemui.dagger;
 
-
 import com.android.systemui.dagger.GlobalModule;
 import com.android.systemui.dagger.GlobalRootComponent;
 

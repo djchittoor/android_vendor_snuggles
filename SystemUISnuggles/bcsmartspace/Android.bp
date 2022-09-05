@@ -1,0 +1,21 @@
+android_library {
+    name: "bcsmartspace",
+
+    srcs: ["src/**/*.java"],
+
+    static_libs: [
+        "androidx.cardview_cardview",
+        "androidx-constraintlayout_constraintlayout",
+        "iconloader_base",
+        "smartspace-proto-java",
+        "SystemUIPluginLib",
+        "SystemUISharedLib",
+        "SystemUI-statsd",
+    ],
+
+    optimize: {
+        enabled: false,
+    },
+
+    resource_dirs: ["res"],
+}
