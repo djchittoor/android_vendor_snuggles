@@ -5,6 +5,7 @@ import com.android.systemui.dagger.DependencyProvider;
 import com.android.systemui.dagger.SysUIComponent;
 import com.android.systemui.dagger.SysUISingleton;
 import com.android.systemui.dagger.SystemUIBinder;
+import com.android.systemui.dagger.SystemUIModule;
 import com.android.systemui.dagger.SystemUICoreStartableModule;
 import com.android.systemui.dagger.ReferenceSystemUIModule;
 
@@ -16,7 +17,7 @@ import dagger.Subcomponent;
             DefaultComponentBinder.class,
             DependencyProvider.class,
             SystemUIBinder.class,
-            SystemUISnugglesModule.class,
+            SystemUIModule.class,
             SystemUICoreStartableModule.class,
             SnugglesSystemUIModule.class
         })
