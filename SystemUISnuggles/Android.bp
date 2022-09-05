@@ -1,0 +1,47 @@
+android_library {
+    name: "SystemUISnuggles-core",
+    srcs: [
+        "src/**/*.kt",
+        "src/**/*.java",
+        "src/**/I*.aidl",
+    ],
+    static_libs: [
+        "SystemUI-core",
+    ],
+    proto: {
+        type: "nano",
+    },
+    manifest: "AndroidManifest.xml",
+
+    kotlincflags: ["-Xjvm-default=enable"],
+
+    plugins: ["dagger2-compiler"],
+    resource_dirs: ["res"],
+}
+
+android_app {
+    name: "SystemUISnuggles",
+    defaults: ["platform_app_defaults"],
+    static_libs: [
+        "SystemUISnuggles-core",
+    ],
+    use_embedded_native_libs: true,
+    platform_apis: true,
+    system_ext_specific: true,
+    certificate: "platform",
+    privileged: true,
+
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
+
+    kotlincflags: ["-Xjvm-default=enable"],
+
+    dxflags: ["--multi-dex"],
+    required: [
+        "privapp_whitelist_com.android.systemui",
+    ],
+    overrides: [
+        "SystemUI",
+    ],
+}

@@ -1,0 +1,4 @@
+-include ../../../frameworks/base/packages/SystemUI/proguard.flags
+
+-keep class com.snuggles.** { *; }
+-keep class vendor.** { *; }
