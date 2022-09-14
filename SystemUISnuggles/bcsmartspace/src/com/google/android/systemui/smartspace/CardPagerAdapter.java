@@ -56,13 +56,13 @@ public class CardPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object obj) {
-        return view == ((ViewHolder) obj).card;
+        return view == ((ViewHolder) obj).mCard;
     }
 
     @Override
     public void destroyItem(ViewGroup viewGroup, int i, Object obj) {
         ViewHolder viewHolder = (ViewHolder) obj;
-        viewGroup.removeView(viewHolder.card);
+        viewGroup.removeView(viewHolder.mCard);
         if (mHolders.get(i) == viewHolder) {
             mHolders.remove(i);
         }
@@ -73,7 +73,7 @@ public class CardPagerAdapter extends PagerAdapter {
         if (viewHolder == null) {
             return null;
         }
-        return viewHolder.card;
+        return viewHolder.mCard;
     }
 
     public SmartspaceTarget getTargetAtPosition(int i) {
@@ -90,18 +90,18 @@ public class CardPagerAdapter extends PagerAdapter {
     @Override
     public int getItemPosition(Object obj) {
         ViewHolder viewHolder = (ViewHolder) obj;
-        SmartspaceTarget targetAtPosition = getTargetAtPosition(viewHolder.position);
-        if (viewHolder.target == targetAtPosition) {
+        SmartspaceTarget targetAtPosition = getTargetAtPosition(viewHolder.mPosition);
+        if (viewHolder.mTarget == targetAtPosition) {
             return -1;
         }
         if (targetAtPosition == null
-                || getFeatureType(targetAtPosition) != getFeatureType(viewHolder.target)
+                || getFeatureType(targetAtPosition) != getFeatureType(viewHolder.mTarget)
                 || !Objects.equals(
                         targetAtPosition.getSmartspaceTargetId(),
-                        viewHolder.target.getSmartspaceTargetId())) {
+                        viewHolder.mTarget.getSmartspaceTargetId())) {
             return -2;
         }
-        viewHolder.target = targetAtPosition;
+        viewHolder.mTarget = targetAtPosition;
         onBindViewHolder(viewHolder);
         return -1;
     }
@@ -111,7 +111,7 @@ public class CardPagerAdapter extends PagerAdapter {
         SmartspaceTarget smartspaceTarget = mSmartspaceTargets.get(i);
         BcSmartspaceCard createBaseCard =
                 createBaseCard(viewGroup, getFeatureType(smartspaceTarget));
-        ViewHolder viewHolder = new ViewHolder(i, null, createBaseCard, smartspaceTarget);
+        ViewHolder viewHolder = new ViewHolder(i, createBaseCard, smartspaceTarget);
         onBindViewHolder(viewHolder);
         viewGroup.addView(createBaseCard);
         mHolders.put(i, viewHolder);
@@ -174,8 +174,8 @@ public class CardPagerAdapter extends PagerAdapter {
 
     private void onBindViewHolder(ViewHolder viewHolder) {
         BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier;
-        SmartspaceTarget smartspaceTarget = mSmartspaceTargets.get(viewHolder.position);
-        BcSmartspaceCard bcSmartspaceCard = viewHolder.card;
+        SmartspaceTarget smartspaceTarget = mSmartspaceTargets.get(viewHolder.mPosition);
+        BcSmartspaceCard bcSmartspaceCard = viewHolder.mCard;
         BcSmartspaceCardLoggingInfo build =
                 new BcSmartspaceCardLoggingInfo.Builder()
                         .setInstanceId(InstanceId.create(smartspaceTarget))
@@ -183,7 +183,7 @@ public class CardPagerAdapter extends PagerAdapter {
                         .setDisplaySurface(
                                 BcSmartSpaceUtil.getLoggingDisplaySurface(
                                         mRoot.getContext().getPackageName(), mDozeAmount))
-                        .setRank(viewHolder.position)
+                        .setRank(viewHolder.mPosition)
                         .setCardinality(mSmartspaceTargets.size())
                         .setSubcardInfo(
                                 BcSmartspaceCardLoggerUtil.createSubcardLoggingInfo(
@@ -306,8 +306,8 @@ public class CardPagerAdapter extends PagerAdapter {
 
     private void refreshCardColors() {
         for (int i = 0; i < mHolders.size(); i++) {
-            mHolders.get(i).card.setPrimaryTextColor(mCurrentTextColor);
-            mHolders.get(i).card.setDozeAmount(mDozeAmount);
+            mHolders.get(i).mCard.setPrimaryTextColor(mCurrentTextColor);
+            mHolders.get(i).mCard.setDozeAmount(mDozeAmount);
         }
     }
 
@@ -330,20 +330,17 @@ public class CardPagerAdapter extends PagerAdapter {
     }
 
     public static class ViewHolder {
-        public final BaseTemplateCard mCard;
-        public final BcSmartspaceCard mLegacyCard;
+        public final BcSmartspaceCard mCard;
         public final int mPosition;
         public SmartspaceTarget mTarget;
 
         ViewHolder(
                 int i,
                 BcSmartspaceCard bcSmartspaceCard,
-                SmartspaceTarget smartspaceTarget,
-                BaseTemplateCard baseTemplateCard) {
+                SmartspaceTarget smartspaceTarget) {
             this.mPosition = i;
-            this.mLegacyCard = bcSmartspaceCard;
+            this.mCard = bcSmartspaceCard;
             this.mTarget = smartspaceTarget;
-            this.mCard = baseTemplateCard;
         }
     }
 }

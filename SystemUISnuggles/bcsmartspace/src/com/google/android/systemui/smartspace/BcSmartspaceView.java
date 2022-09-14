@@ -311,41 +311,18 @@ public class BcSmartspaceView extends FrameLayout
     }
 
     @Override
-    public int getCurrentCardTopPadding() {
-        BcSmartspaceCard bcSmartspaceCard;
-        BaseTemplateCard baseTemplateCard;
-        CardPagerAdapter.ViewHolder viewHolder =
-                mAdapter.findViewHolderForPosition(getSelectedPage());
-        ViewGroup viewGroup = null;
-        if (viewHolder == null) {
-            bcSmartspaceCard = null;
-        } else {
-            bcSmartspaceCard = viewHolder.mLegacyCard;
-        }
-        if (bcSmartspaceCard != null) {
-            CardPagerAdapter.ViewHolder viewHolder2 =
-                    mAdapter.findViewHolderForPosition(getSelectedPage());
-            if (viewHolder2 != null) {
-                viewGroup = viewHolder2.mLegacyCard;
-            }
-            return viewGroup.getPaddingTop();
-        }
-        CardPagerAdapter.ViewHolder viewHolder3 =
-                mAdapter.findViewHolderForPosition(getSelectedPage());
-        if (viewHolder3 == null) {
-            baseTemplateCard = null;
-        } else {
-            baseTemplateCard = viewHolder3.mCard;
-        }
-        if (baseTemplateCard != null) {
-            CardPagerAdapter.ViewHolder viewHolder4 =
-                    mAdapter.findViewHolderForPosition(getSelectedPage());
-            if (viewHolder4 != null) {
-                viewGroup = viewHolder4.mCard;
-            }
-            return viewGroup.getPaddingTop();
+    public final int getCurrentCardTopPadding() {
+        BcSmartspaceCard card = mAdapter.getCardAtPosition(getSelectedPage());
+        if (card != null) {
+            return card.getPaddingTop();
         }
         return 0;
+    }
+
+
+    @Override
+    public final int getSelectedPage() {
+        return mViewPager.getCurrentItem();
     }
 
     public void logSmartspaceEvent(
