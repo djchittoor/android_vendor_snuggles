@@ -277,7 +277,7 @@ public class SmartSpaceController implements Dumpable {
     }
 
     @Override
-    public void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public void dump(PrintWriter printWriter, String[] strArr) {
         printWriter.println();
         printWriter.println("SmartspaceController");
         printWriter.println("  initial broadcast: " + mSmartSpaceEnabledBroadcastSent);
