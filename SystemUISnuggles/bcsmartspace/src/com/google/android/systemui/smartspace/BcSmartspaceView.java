@@ -244,7 +244,7 @@ public class BcSmartspaceView extends FrameLayout
 
     @Override
     public int getSelectedPage() {
-        return this.mViewPager.mCurItem;
+        return this.mViewPager.getCurrentItem();
     }
 
     @Override
@@ -317,12 +317,6 @@ public class BcSmartspaceView extends FrameLayout
             return card.getPaddingTop();
         }
         return 0;
-    }
-
-
-    @Override
-    public final int getSelectedPage() {
-        return mViewPager.getCurrentItem();
     }
 
     public void logSmartspaceEvent(
@@ -432,6 +426,11 @@ public class BcSmartspaceView extends FrameLayout
             return;
         }
         logCurrentDisplayedCardSeen();
+    }
+
+    @Override
+    public void setIsDreaming(boolean z) {
+        mAdapter.setIsDreaming(z);
     }
 
     @Override
