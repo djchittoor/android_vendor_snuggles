@@ -4,10 +4,10 @@ import android.content.ComponentName;
 import android.content.Context;
 
 import com.android.systemui.flags.FeatureFlags;
+import com.android.systemui.flags.Flags;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: KeyguardSmartspaceController.kt */
 public final class KeyguardSmartspaceController {
     private final Context context;
     private final FeatureFlags featureFlags;
@@ -27,7 +27,7 @@ public final class KeyguardSmartspaceController {
         this.featureFlags = featureFlags;
         this.zenController = zenController;
         this.mediaController = mediaController;
-        if (!featureFlags.isSmartspaceEnabled()) {
+        if (!featureFlags.isEnabled(Flags.SMARTSPACE)) {
             context.getPackageManager()
                     .setComponentEnabledSetting(
                             new ComponentName(
