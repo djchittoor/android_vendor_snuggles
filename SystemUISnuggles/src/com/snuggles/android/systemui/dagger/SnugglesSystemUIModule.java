@@ -71,6 +71,8 @@ import com.android.systemui.statusbar.policy.SensorPrivacyController;
 import com.android.systemui.statusbar.policy.SensorPrivacyControllerImpl;
 import com.android.systemui.volume.dagger.VolumeModule;
 
+import com.snuggles.android.systemui.smartspace.dagger.SmartspaceSnugglesModule;
+
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
@@ -97,6 +99,7 @@ import javax.inject.Named;
             MediaModule.class,
             PowerModule.class,
             QSModule.class,
+            SmartspaceSnugglesModule.class,
             StartCentralSurfacesModule.class,
             VolumeModule.class
         })
