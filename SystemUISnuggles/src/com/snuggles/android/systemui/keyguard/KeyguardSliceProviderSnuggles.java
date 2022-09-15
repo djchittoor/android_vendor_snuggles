@@ -27,11 +27,13 @@ import com.snuggles.android.systemui.smartspace.SmartSpaceUpdateListener;
 
 import java.lang.ref.WeakReference;
 
+import javax.inject.Inject;
+
 public class KeyguardSliceProviderSnuggles extends KeyguardSliceProvider
         implements SmartSpaceUpdateListener {
     private static final boolean DEBUG = Log.isLoggable("KeyguardSliceProvider", 3);
     private boolean mHideSensitiveContent;
-    public SmartSpaceController mSmartSpaceController;
+    @Inject public SmartSpaceController mSmartSpaceController;
     private SmartSpaceData mSmartSpaceData;
     private boolean mHideWorkContent = true;
     private final Uri mWeatherUri =
