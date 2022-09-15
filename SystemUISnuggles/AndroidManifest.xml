@@ -10,4 +10,16 @@
         android:sharedUserId="android.uid.systemui"
         xmlns:tools="http://schemas.android.com/tools"
         coreApp="true">
+
+    <application>
+        <provider android:name=".keyguard.KeyguardSliceProvider"
+            tools:node="remove" />
+
+        <provider android:name="com.snuggles.android.systemui.keyguard.KeyguardSliceProviderSnuggles"
+            android:enabled="true"
+            android:exported="true"
+            android:authorities="com.android.systemui.keyguard"/>
+
+    </application>
+
 </manifest>

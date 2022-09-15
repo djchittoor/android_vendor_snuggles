@@ -8,6 +8,9 @@ import com.android.systemui.dagger.SystemUIBinder;
 import com.android.systemui.dagger.SystemUICoreStartableModule;
 import com.android.systemui.dagger.SystemUIModule;
 
+import com.snuggles.android.systemui.keyguard.KeyguardSliceProviderSnuggles;
+import com.snuggles.android.systemui.smartspace.KeyguardSmartspaceController;
+
 import dagger.Subcomponent;
 
 @SysUISingleton
@@ -26,4 +29,9 @@ public interface SysUIComponentSnuggles extends SysUIComponent {
     interface Builder extends SysUIComponent.Builder {
         SysUIComponentSnuggles build();
     }
+
+    void inject(KeyguardSliceProviderSnuggles keyguardSliceProviderSnuggles);
+
+    @SysUISingleton
+    KeyguardSmartspaceController createKeyguardSmartspaceController();
 }

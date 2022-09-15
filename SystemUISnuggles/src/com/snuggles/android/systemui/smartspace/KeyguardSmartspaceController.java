@@ -32,7 +32,7 @@ public final class KeyguardSmartspaceController {
                     .setComponentEnabledSetting(
                             new ComponentName(
                                     "com.android.systemui",
-                                    "com.google.android.systemui.keyguard.KeyguardSliceProviderGoogle"),
+                                    "com.snuggles.android.systemui.keyguard.KeyguardSliceProviderSnuggles"),
                             1,
                             1);
             return;
