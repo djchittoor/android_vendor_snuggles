@@ -10,27 +10,15 @@ import androidx.viewpager.widget.ViewPager;
 public class InterceptingViewPager extends ViewPager {
     private boolean mHasPerformedLongPress;
     private boolean mHasPostedLongPress;
-    private final EventProxy mSuperOnTouch =
-            new EventProxy() {
-                @Override
-                public final boolean delegateEvent(MotionEvent motionEvent) {
-                    return onTouchEvent(motionEvent);
-                }
-            };
-    private final EventProxy mSuperOnIntercept =
-            new EventProxy() {
-                @Override
-                public final boolean delegateEvent(MotionEvent motionEvent) {
-                    return onInterceptTouchEvent(motionEvent);
-                }
-            };
-    private final Runnable mLongPressCallback =
-            new Runnable() {
-                @Override
-                public final void run() {
-                    triggerLongPress();
-                }
-            };
+    private final EventProxy mSuperOnTouch = (motionEvent) -> {
+            return super.onTouchEvent(motionEvent);
+    };
+    private final EventProxy mSuperOnIntercept = (motionEvent) -> {
+            return super.onInterceptTouchEvent(motionEvent);
+    };
+    private final Runnable mLongPressCallback = () -> {
+            triggerLongPress();
+    };
 
     public interface EventProxy {
         boolean delegateEvent(MotionEvent motionEvent);
